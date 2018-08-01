@@ -1,0 +1,1 @@
+一个模板单例的实现, 可以通过使用typedef Singleton<ClassName> SingleClassName;来实现单体类
