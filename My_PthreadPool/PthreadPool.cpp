@@ -70,7 +70,7 @@ PthreadPool::~PthreadPool(){
     destroy();
 }
 
-void PthreadPool::add_task( void*(*_run)(void *), void * _arg){
+void PthreadPool::add_task(void*(*_run)(void *), void * _arg){
     m_cond.lock();      // 因为涉及到对线程池中参数的变化, 因此需要加锁
     // 创建任务并加入队列
     TaskNode *new_task = new TaskNode;

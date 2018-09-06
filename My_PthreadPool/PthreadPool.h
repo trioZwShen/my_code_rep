@@ -40,7 +40,6 @@ protected:
     void destroy();
 
 private:
-
     /**
      *  任务结构体
      */
@@ -84,5 +83,4 @@ private:
      */
     MutexCond m_cond;
 };
-
 #endif
