@@ -7,8 +7,6 @@
 #include <pthread.h>
 #include <time.h>
 
-
-
 class MutexCond{
 public:
     /**
@@ -36,8 +34,11 @@ public:
 
     /**
      *  挂起当前线程, 并设置最大等待时长
+     *  @_time  最大等待时长, 如果为0表示不设等待时长
      */
     inline int timedwait(unsigned int _time){
+        if (_time==0)
+            return pthread_cond_wait(&cond, &mutex);
         struct timespec abstime;
         clock_gettime(CLOCK_REALTIME, &abstime);
         abstime.tv_sec += _time;

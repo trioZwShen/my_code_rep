@@ -19,7 +19,7 @@ public:
     /**
      *  构造函数, 传入参数需要初始化参数最大线程数
      */
-    PthreadPool(unsigned int _max);
+    PthreadPool(unsigned int _max, unsigned int _wait_time=0);
 
     /**
      *  析构函数
@@ -68,6 +68,11 @@ private:
      *  当前线程空闲线程数
      */
     unsigned int pthread_idle;
+
+    /**
+     *  线程等待时间
+     */
+    unsigned int wait_time;
 
     /**
      *  退出标志

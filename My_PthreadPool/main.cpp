@@ -20,6 +20,7 @@ int main()
         int * tmp = new int;
         *tmp = i;
         pthread_pool.add_task(my_task, (void *)tmp);
+        sleep(6);
     }
 
     //sleep(30);

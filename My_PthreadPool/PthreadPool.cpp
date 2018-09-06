@@ -17,7 +17,7 @@ void * pthread_routine(void * arg){
         // 等待任务队列中出现新任务, 或者线程池销毁通知
         while (pool_ptr->task_queue.empty() && !pool_ptr->quit_flag){
             printf("thread 0x%x wait...\n", pthread_self());
-            int STATUS = pool_ptr->m_cond.timedwait(2);
+            int STATUS = pool_ptr->m_cond.timedwait(pool_ptr->wait_time);
             if (STATUS == ETIMEDOUT){         // 如果返回值非0, 表示超时
                 printf("thread 0x%x timeout\n", pthread_self());
                 is_timeout = 1;
@@ -60,8 +60,9 @@ void * pthread_routine(void * arg){
     return NULL;
 }
 
-PthreadPool::PthreadPool(unsigned int _max)
-    :task_queue(), pthread_max(_max), pthread_count(0), pthread_idle(0), quit_flag(false), m_cond()
+PthreadPool::PthreadPool(unsigned int _max, unsigned int _wait_time)
+    :task_queue(), pthread_max(_max), pthread_count(0), pthread_idle(0), quit_flag(false), 
+    wait_time(_wait_time), m_cond()
 {
 }
 
@@ -70,7 +71,6 @@ PthreadPool::~PthreadPool(){
 }
 
 void PthreadPool::add_task( void*(*_run)(void *), void * _arg){
-    printf("add task\n");
     m_cond.lock();      // 因为涉及到对线程池中参数的变化, 因此需要加锁
     // 创建任务并加入队列
     TaskNode *new_task = new TaskNode;
