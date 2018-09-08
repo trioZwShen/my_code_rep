@@ -1,6 +1,9 @@
 /**
- *  基于pthread.h以及类实现c++轻量级线程池
- *
+ * @file 	: Coroutine.h
+ * @author	: neilzwshen
+ * @time	: 2018-9-8
+ * @version	: 1.0
+ * @remark	: 基于pthread.h以及类实现c++轻量级线程池
  */
 
 #ifndef PTHREADPOOL_H_
